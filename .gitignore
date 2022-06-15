@@ -6,6 +6,7 @@ out/
 *.war
 *.ear
 *.class
+*.so
 
 # eclipse specific git ignore
 *.pydevproject
