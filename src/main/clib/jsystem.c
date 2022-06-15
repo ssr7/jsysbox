@@ -1,6 +1,5 @@
 #include <stdio.h> 
 #include <jni.h>
-#include "jsystem.h" 
 
 JNIEXPORT void JNICALL Java_ir_moke_jsysbox_System_reboot (JNIEnv *env, jobject obj) {
 
