@@ -14,12 +14,30 @@ limitations under the License.
 
 #include <stdio.h>
 #include <jni.h>
+#include <unistd.h>
+#include <sys/reboot.h>
+#include <sys/mount.h>
+
 
 JNIEXPORT void JNICALL Java_ir_moke_jsysbox_JSystem_reboot (JNIEnv *env, jobject obj) {
-
-	printf("Hello dear !\n") ;
+	sync() ;
+	reboot(RB_AUTOBOOT);
 }
 
 JNIEXPORT void JNICALL Java_ir_moke_jsysbox_JSystem_shutdown (JNIEnv *env, jobject obj) {
+    sync() ;
+	reboot(RB_POWER_OFF);
+}
 
+JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_JSystem_mount (JNIEnv *env, jclass clazz, jstring src, jstring dst,jstring file_system_type) {
+    const char *src_path = (*env)->GetStringUTFChars(env,src,0);
+    const char *dst_path = (*env)->GetStringUTFChars(env,dst,0);
+    const char *fs_type = (*env)->GetStringUTFChars(env,file_system_type,0);
+
+    return mount(src_path,dst_path,fs_type,0,"") == 0 ;
+}
+
+JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_JSystem_umount (JNIEnv *env, jclass clazz, jstring target) {
+    const char *target_path = (*env)->GetStringUTFChars(env,target,0);
+    return umount(target_path) == 0 ;
 }

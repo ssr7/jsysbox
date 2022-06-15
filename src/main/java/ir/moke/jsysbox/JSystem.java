@@ -23,5 +23,7 @@ public class JSystem {
     public native static void reboot();
 
     public native static void shutdown();
+    public native static boolean mount(String src,String dst,String type);
+    public native static boolean umount(String src);
 
 }

@@ -14,9 +14,22 @@
 
 package ir.moke.jsysbox;
 
-public class MainClass {
-    public static void main(String[] args) {
-        boolean result = JSystem.mount("udev", "/mnt", "devtmpfs");
-        System.out.println(result);
+public enum FileSystemType {
+    DEV_TMPFS("devtmpfs"),
+    PROC("proc"),
+    EXT4("ext4"),
+    BTRFS("btrfs"),
+    VFAT("vfat"),
+    NTFS("ntfs"),
+    ;
+
+    private final String type ;
+
+    FileSystemType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 }
