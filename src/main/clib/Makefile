@@ -6,7 +6,7 @@ BUILD_DIR=build
 
 all: jsystem  
 
-init: 
+init:
 	mkdir -p $(BUILD_DIR)
 
 jsystem: init
