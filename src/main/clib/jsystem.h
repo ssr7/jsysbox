@@ -63,14 +63,6 @@ JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_JSystem_unSetEnv
 JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_JSystem_getEnv
   (JNIEnv *, jclass, jstring);
 
-/*
- * Class:     ir_moke_jsysbox_JSystem
- * Method:    envList
- * Signature: ()[Ljava/lang/String;
- */
-JNIEXPORT jobjectArray JNICALL Java_ir_moke_jsysbox_JSystem_envList
-  (JNIEnv *, jclass);
-
 #ifdef __cplusplus
 }
 #endif
