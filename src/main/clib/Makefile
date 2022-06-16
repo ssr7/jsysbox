@@ -1,4 +1,4 @@
-CC=gcc 
+CC=cc 
 CFLAGS=-W -fPIC -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -shared
 BUILD_DIR=build
 
@@ -10,7 +10,7 @@ init:
 	mkdir -p $(BUILD_DIR)
 
 jsystem: init
-	$(CC) $(CFLAGS) -shared -o $(BUILD_DIR)/jsystem.so jsystem.c
+	$(CC) $(CFLAGS) -shared -o $(BUILD_DIR)/jsystem.so jsystem.cpp
 	strip --strip-all $(BUILD_DIR)/jsystem.so
 
 
