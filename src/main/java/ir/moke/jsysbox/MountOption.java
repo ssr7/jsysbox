@@ -14,9 +14,11 @@
 
 package ir.moke.jsysbox;
 
-public class MainClass {
-    public static void main(String[] args) {
-
-
-    }
+public enum MountOption {
+    RW,
+    NOSUID,
+    NODEV,
+    NOEXEC,
+    RELATIME,
+    DEFAULTS
 }
