@@ -25,17 +25,17 @@ limitations under the License.
 extern char **environ;
 
 
-JNIEXPORT void JNICALL Java_ir_moke_jsysbox_JSystem_reboot (JNIEnv *env, jobject obj) {
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_reboot (JNIEnv *env, jobject obj) {
 	sync() ;
 	reboot(RB_AUTOBOOT);
 }
 
-JNIEXPORT void JNICALL Java_ir_moke_jsysbox_JSystem_shutdown (JNIEnv *env, jobject obj) {
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_shutdown (JNIEnv *env, jobject obj) {
     sync() ;
 	reboot(RB_POWER_OFF);
 }
 
-JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_JSystem_mount (JNIEnv *env, jclass clazz, jstring src, jstring dst,jstring file_system_type,jstring options) {
+JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_mount (JNIEnv *env, jclass clazz, jstring src, jstring dst,jstring file_system_type,jstring options) {
     const char *src_path = env->GetStringUTFChars(src,0);
     const char *dst_path = env->GetStringUTFChars(dst,0);
     const char *fs_type = env->GetStringUTFChars(file_system_type,0);
@@ -44,25 +44,25 @@ JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_JSystem_mount (JNIEnv *env, jcla
     return mount(src_path,dst_path,fs_type,0,mnt_opt) == 0 ;
 }
 
-JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_JSystem_umount (JNIEnv *env, jclass clazz, jstring target) {
+JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_umount (JNIEnv *env, jclass clazz, jstring target) {
     const char *target_path = env->GetStringUTFChars(target,0);
     return umount(target_path) == 0 ;
 }
 
-JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_JSystem_setEnv (JNIEnv *env, jclass clazz, jstring key, jstring value) {
+JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_setEnv (JNIEnv *env, jclass clazz, jstring key, jstring value) {
     const char *k = env->GetStringUTFChars(key,0);
     const char *v = env->GetStringUTFChars(value,0);
     int r = setenv(k, v, 1);
     return r == 0;
 }
 
-JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_JSystem_unSetEnv (JNIEnv *env, jclass clazz, jstring key) {
+JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_unSetEnv (JNIEnv *env, jclass clazz, jstring key) {
     const char *k = env->GetStringUTFChars(key,0);
     int r = unsetenv(k);
     return r == 0;
 }
 
-JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_JSystem_getEnv (JNIEnv *env, jclass clazz, jstring key) {
+JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getEnv (JNIEnv *env, jclass clazz, jstring key) {
     const char *k = env->GetStringUTFChars(key,0);
     char *v = getenv(k);
     return env -> NewStringUTF(v);
