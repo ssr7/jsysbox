@@ -39,12 +39,35 @@ public class JNetwork {
 
     public native static Ethernet[] ethernetList();
 
+    /**
+     * @param ethName interface name
+     * @return {@link Ethernet}
+     */
     public native static Ethernet ethernet(String ethName);
 
+    /**
+     * @param ethName interface name
+     * @param ipAddress ip address
+     * @param netmask netmask
+     * @return {@link Ethernet}
+     * @throws JNetworkException
+     */
     public native static Ethernet setIp(String ethName, String ipAddress, String netmask) throws JNetworkException;
 
+    /**
+     * @param destination target ip address
+     * @param netmask netmask
+     * @param gateway gateway
+     * @param ethernet interface name
+     * @param metrics route metrics
+     * @param isHost route type host or network
+     * @param delete add or delete
+     */
     public native static void updateRoute(String destination, String netmask, String gateway, String ethernet, int metrics, boolean isHost, boolean delete);
 
+    /**
+     * @param gateway ip address
+     */
     public static void setDefaultGateway(String gateway) {
         updateRoute("0.0.0.0", "0.0.0.0", gateway, null, DEFAULT_METRICS, false, false);
     }
