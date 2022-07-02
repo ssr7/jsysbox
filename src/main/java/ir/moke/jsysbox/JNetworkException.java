@@ -14,23 +14,8 @@
 
 package ir.moke.jsysbox;
 
-public class JSystem {
-
-    static {
-        JniNativeLoader.load("jsystem.so");
+public class JNetworkException extends Exception{
+    public JNetworkException(String message) {
+        super(message);
     }
-
-    public native static void reboot();
-
-    public native static void shutdown();
-
-    public native static boolean mount(String src, String dst, String type, String options);
-
-    public native static boolean umount(String src);
-
-    public native static boolean setEnv(String key, String value);
-
-    public native static boolean unSetEnv(String key);
-
-    public native static String getEnv(String key);
 }

@@ -14,8 +14,23 @@
 
 package ir.moke.jsysbox;
 
-public class MainClass {
-    public static void main(String[] args) {
+import ir.moke.jsysbox.network.JNetwork;
 
+public class MainClass {
+    public static void main(String[] args) throws Exception {
+        String destination = "10.10.1.220";
+        String netmask = "255.255.0.0" ;
+        String gateway = "192.168.1.1" ;
+        String ethernet = "eth0" ;
+
+        JNetwork.ping("www.dsahkdhkhasd.xo",null,98,6,1000,null);
+
+//        JNetwork.setIp(ethernet,destination,netmask);
+
+//        JNetwork.updateRoute(destination,netmask,gateway,null,true,false);
+//        JNetwork.deleteRoute(2);
+//        JNetwork.setDefaultGateway("192.168.1.1");
+
+//        JNetwork.route().forEach(System.out::println);
     }
 }
