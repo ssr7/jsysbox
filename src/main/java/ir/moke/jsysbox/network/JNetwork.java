@@ -215,7 +215,7 @@ public class JNetwork {
                 }
                 if (reachable) reachableCount++;
                 long diff = Duration.between(startTime, Instant.now()).toMillis();
-                System.out.printf("%d: from %s ttl=%d time=%d ms\n", reachableCount, destination, ttl, diff);
+                System.out.printf("%d: from %s time=%d ms\n", reachableCount, destination, diff);
                 sleep(interval);
             }
         } catch (IOException e) {
