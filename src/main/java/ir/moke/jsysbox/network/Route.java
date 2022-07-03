@@ -14,103 +14,21 @@
 
 package ir.moke.jsysbox.network;
 
-public class Route {
-    private int id ;
-    private String destination ;
-    private String netmask ;
-    private String gateway ;
-    private String iface ;
-    private int flags ;
-    private int use ;
-    private int metrics ;
-    private int mtu ;
-    private int window ;
-    private int irtt ;
-    private int refcnt;
-
-    public Route(int id ,String destination, String netmask, String gateway, String iface, int flags, int use, int metrics, int mtu, int window, int irtt, int refcnt) {
-        this.id = id;
-        this.destination = destination;
-        this.netmask = netmask;
-        this.gateway = gateway;
-        this.iface = iface;
-        this.flags = flags;
-        this.use = use;
-        this.metrics = metrics;
-        this.mtu = mtu;
-        this.window = window;
-        this.irtt = irtt;
-        this.refcnt = refcnt;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public String getNetmask() {
-        return netmask;
-    }
-
-    public String getGateway() {
-        return gateway;
-    }
-
-    public String getIface() {
-        return iface;
-    }
-
-    public int getFlags() {
-        return flags;
-    }
-
-    public int getUse() {
-        return use;
-    }
-
-    public int getMetrics() {
-        return metrics;
-    }
-
-    public int getMtu() {
-        return mtu;
-    }
-
-    public int getWindow() {
-        return window;
-    }
-
-    public int getIrtt() {
-        return irtt;
-    }
-
-    public int getRefcnt() {
-        return refcnt;
-    }
+public record Route(
+        int id,
+        String destination,
+        String netmask,
+        String gateway,
+        String iface,
+        int flags,
+        int use,
+        int metrics,
+        int mtu,
+        int window,
+        int irtt,
+        int refcnt) {
 
     public String getFlagStr() {
-        int flags = getFlags();
         return RouteFlag.getFlagStr(flags);
-    }
-
-    @Override
-    public String toString() {
-        return "Route{" +
-                "id=" + id + '\'' +
-                "destination='" + destination + '\'' +
-                ", netmask='" + netmask + '\'' +
-                ", gateway='" + gateway + '\'' +
-                ", iface='" + iface + '\'' +
-                ", flags=" + getFlagStr() +
-                ", use=" + use +
-                ", metrics=" + metrics +
-                ", mtu=" + mtu +
-                ", window=" + window +
-                ", irtt=" + irtt +
-                ", refcnt=" + refcnt +
-                '}';
     }
 }

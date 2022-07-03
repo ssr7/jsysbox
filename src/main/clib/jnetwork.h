@@ -7,29 +7,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/*
- * Class:     ir_moke_jsysbox_network_JNetwork
- * Method:    ethernetList
- * Signature: ()Ljava/util/List;
- */
-JNIEXPORT jobjectArray JNICALL Java_ir_moke_jsysbox_network_JNetwork_ethernetList
-  (JNIEnv *, jclass);
-
-/*
- * Class:     ir_moke_jsysbox_network_JNetwork
- * Method:    ethernet
- * Signature: (Ljava/lang/String;)Lir/moke/jsysbox/network/Ethernet;
- */
-JNIEXPORT jobject JNICALL Java_ir_moke_jsysbox_network_JNetwork_ethernet
-  (JNIEnv *, jclass, jstring);
 
 /*
  * Class:     ir_moke_jsysbox_network_JNetwork
  * Method:    setIp
  * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lir/moke/jsysbox/network/Ethernet;
  */
-JNIEXPORT jobject JNICALL Java_ir_moke_jsysbox_network_JNetwork_setIp
-  (JNIEnv *, jclass, jstring, jstring, jstring);
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_setIp
+(JNIEnv *, jclass, jstring, jstring, jstring);
 
 /*
  * Class:     ir_moke_jsysbox_network_JNetwork
@@ -37,7 +22,7 @@ JNIEXPORT jobject JNICALL Java_ir_moke_jsysbox_network_JNetwork_setIp
  * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
  */
 JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_updateRoute
-  (JNIEnv *, jclass, jstring, jstring, jstring, jstring, jboolean,jboolean);
+(JNIEnv *, jclass, jstring, jstring, jstring, jstring,jint, jboolean,jboolean);
 
 #ifdef __cplusplus
 }

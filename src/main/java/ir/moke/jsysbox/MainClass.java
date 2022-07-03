@@ -23,14 +23,9 @@ public class MainClass {
         String gateway = "192.168.1.1" ;
         String ethernet = "eth0" ;
 
-        JNetwork.ping("www.dsahkdhkhasd.xo",null,98,6,1000,null);
 
-//        JNetwork.setIp(ethernet,destination,netmask);
+//        JNetwork.updateRoute("10.10.10.20","255.255.255.255","","wlan0",600,true,false);
+        JNetwork.addHostToRoute("10.10.10.20",null,"wlan0",600);
 
-//        JNetwork.updateRoute(destination,netmask,gateway,null,true,false);
-//        JNetwork.deleteRoute(2);
-//        JNetwork.setDefaultGateway("192.168.1.1");
-
-//        JNetwork.route().forEach(System.out::println);
     }
 }

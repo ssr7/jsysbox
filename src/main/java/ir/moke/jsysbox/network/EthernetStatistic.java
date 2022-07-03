@@ -14,10 +14,10 @@
 
 package ir.moke.jsysbox.network;
 
-public record Ethernet(String iface,
-                       String mac,
-                       String ip,
-                       String netmask,
-                       Short cidr,
-                       EthernetStatistic statistic) {
+public record EthernetStatistic(long rx_pkts,
+                                long rx_bytes,
+                                long rx_errors,
+                                long tx_pkts,
+                                long tx_bytes,
+                                long tx_errors) {
 }
