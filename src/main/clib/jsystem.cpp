@@ -15,33 +15,37 @@ limitations under the License.
 #include <jni.h>
 #include "jsystem.h"
 
+#include <iostream>
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/reboot.h>
 #include <sys/mount.h>
 #include <stdlib.h>
 #include <string.h>
+#include <list>
 
 extern char **environ;
 
+using namespace std;
 
-JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_reboot (JNIEnv *env, jobject obj) {
-	sync() ;
-	reboot(RB_AUTOBOOT);
-}
-
-JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_shutdown (JNIEnv *env, jobject obj) {
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_reboot () {
     sync() ;
-	reboot(RB_POWER_OFF);
+    reboot(RB_AUTOBOOT);
 }
 
-JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_mount (JNIEnv *env, jclass clazz, jstring src, jstring dst,jstring file_system_type,jstring options) {
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_shutdown () {
+    sync() ;
+    reboot(RB_POWER_OFF);
+}
+
+JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_mount (JNIEnv *env, jclass clazz, jstring src, jstring dst,jstring file_system_type,jint jflags,jstring options) {
     const char *src_path = env->GetStringUTFChars(src,0);
     const char *dst_path = env->GetStringUTFChars(dst,0);
     const char *fs_type = env->GetStringUTFChars(file_system_type,0);
-    const char *mnt_opt = env->GetStringUTFChars(options,0);
+    const char *mnt_opt = options != NULL ? env->GetStringUTFChars(options,0) : NULL;
+    int flags = (int) jflags;
 
-    return mount(src_path,dst_path,fs_type,0,mnt_opt) == 0 ;
+    return mount(src_path,dst_path,fs_type,flags,mnt_opt) == 0 ;
 }
 
 JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_umount (JNIEnv *env, jclass clazz, jstring target) {
@@ -66,4 +70,20 @@ JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getEnv (JNIEnv *en
     const char *k = env->GetStringUTFChars(key,0);
     char *v = getenv(k);
     return env -> NewStringUTF(v);
+}
+
+JNIEXPORT jobjectArray JNICALL Java_ir_moke_jsysbox_system_JSystem_envList (JNIEnv *env, jclass clazz) {
+    int env_size = sizeof(environ) ;
+    jstring emp_str = env -> NewStringUTF("");
+    jclass s_class = env -> FindClass("java/lang/String");
+    jobjectArray ret = (jobjectArray) env -> NewObjectArray(env_size,s_class,emp_str);
+
+    if (environ != NULL) {
+        int i = 0 ;
+        while(environ[i]) {
+                 jstring v = env->NewStringUTF(environ[i++]) ;
+                 env->SetObjectArrayElement(ret,i,v);
+        }
+    }
+    return ret;
 }

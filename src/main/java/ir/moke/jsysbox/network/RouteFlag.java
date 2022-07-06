@@ -49,14 +49,14 @@ public enum RouteFlag {
                 .findFirst().orElse(null);
     }
 
-    static List<RouteFlag> mapToFlags(int bit) {
+    public static List<RouteFlag> mapToFlags(int bit) {
         List<Integer> integers = getBitNumbers(bit);
         return integers.stream()
                 .map(RouteFlag::getBit)
                 .toList();
     }
 
-    static String getFlagStr(int bit) {
+    public static String getFlagStr(int bit) {
         StringBuilder str = new StringBuilder();
         List<RouteFlag> routeFlags = mapToFlags(bit);
         for (RouteFlag flag : routeFlags) {
@@ -65,11 +65,11 @@ public enum RouteFlag {
         return str.toString();
     }
 
-    static int mapToBit(List<RouteFlag> timeframeList) {
-        return timeframeList.stream().mapToInt(RouteFlag::getBit).sum();
+    public static int mapToBit(RouteFlag... routeFlags) {
+        return Arrays.stream(routeFlags).mapToInt(RouteFlag::getBit).sum();
     }
 
-    static List<Integer> getBitNumbers(int x) {
+    public static List<Integer> getBitNumbers(int x) {
         List<Integer> bitList = new ArrayList<>();
         BitSet bs = BitSet.valueOf(new long[]{x});
         for (int i = bs.nextSetBit(0); i >= 0; i = bs.nextSetBit(i + 1)) {

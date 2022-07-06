@@ -19,13 +19,11 @@ import ir.moke.jsysbox.network.JNetwork;
 public class MainClass {
     public static void main(String[] args) throws Exception {
         String destination = "10.10.1.220";
-        String netmask = "255.255.0.0" ;
-        String gateway = "192.168.1.1" ;
-        String ethernet = "eth0" ;
+        String netmask = "255.255.0.0";
+        String gateway = "192.168.1.1";
+        String ethernet = "vethd5fd904";
 
-
-//        JNetwork.updateRoute("10.10.10.20","255.255.255.255","","wlan0",600,true,false);
-        JNetwork.addHostToRoute("10.10.10.20",null,"wlan0",600);
-
+        Short cidr = JNetwork.getCidr(ethernet);
+        System.out.println(cidr);
     }
 }

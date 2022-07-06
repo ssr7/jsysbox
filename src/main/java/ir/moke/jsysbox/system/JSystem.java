@@ -30,6 +30,13 @@ package ir.moke.jsysbox.system;
 
 import ir.moke.jsysbox.JniNativeLoader;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 public class JSystem {
 
     static {
@@ -40,7 +47,7 @@ public class JSystem {
 
     public native static void shutdown();
 
-    public native static boolean mount(String src, String dst, String type, String options);
+    public native static boolean mount(String src, String dst, String type, int flags, String options);
 
     public native static boolean umount(String src);
 
@@ -49,4 +56,27 @@ public class JSystem {
     public native static boolean unSetEnv(String key);
 
     public native static String getEnv(String key);
+
+    private native static String[] envList();
+
+    public static List<String> environments() {
+        String[] envList = envList();
+        return Arrays.stream(envList).filter(Objects::nonNull)
+                .filter(item -> !item.isEmpty())
+                .toList();
+    }
+
+    public static List<String> mounts() {
+        try {
+            return Files.readAllLines(Paths.get("/proc/mounts"));
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static boolean checkMountPoint(String mountpoint) {
+        List<String> mounts = JSystem.mounts();
+        if (mounts == null) return false;
+        return mounts.stream().anyMatch(item -> item.contains(mountpoint));
+    }
 }

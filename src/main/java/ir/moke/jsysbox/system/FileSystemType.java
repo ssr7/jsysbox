@@ -30,6 +30,7 @@ package ir.moke.jsysbox.system;
 
 public enum FileSystemType {
     DEV_TMPFS("devtmpfs"),
+    SYSFS("sysfs"),
     PROC("proc"),
     EXT4("ext4"),
     BTRFS("btrfs"),

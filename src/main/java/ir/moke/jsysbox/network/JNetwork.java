@@ -72,7 +72,7 @@ public class JNetwork {
         try {
             NetworkInterface networkInterface = NetworkInterface.getByName(iface);
             if (networkInterface == null) return null;
-            return networkInterface.getInterfaceAddresses().stream().filter(item -> item.getAddress() instanceof Inet4Address).findFirst().map(InterfaceAddress::getNetworkPrefixLength).orElse((short) 0);
+            return networkInterface.getInterfaceAddresses().stream().filter(item -> item.getAddress() instanceof Inet4Address).findFirst().map(InterfaceAddress::getNetworkPrefixLength).orElse(null);
         } catch (SocketException e) {
             throw new RuntimeException(e);
         }

@@ -12,16 +12,14 @@ extern "C" {
  * Method:    reboot
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_reboot
-  (JNIEnv *, jclass);
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_reboot();
 
 /*
  * Class:     ir_moke_jsysbox_system_JSystem
  * Method:    shutdown
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_shutdown
-  (JNIEnv *, jclass);
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_shutdown();
 
 /*
  * Class:     ir_moke_jsysbox_system_JSystem
@@ -29,7 +27,7 @@ JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_shutdown
  * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z
  */
 JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_mount
-  (JNIEnv *, jclass, jstring, jstring, jstring, jstring);
+  (JNIEnv *, jclass, jstring, jstring, jstring, jint, jstring);
 
 /*
  * Class:     ir_moke_jsysbox_system_JSystem
@@ -62,6 +60,14 @@ JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_unSetEnv
  */
 JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getEnv
   (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     ir_moke_jsysbox_system_JSystem
+ * Method:    envList
+ * Signature: ()V
+ */
+JNIEXPORT jobjectArray JNICALL Java_ir_moke_jsysbox_system_JSystem_envList
+    (JNIEnv *, jclass);
 
 #ifdef __cplusplus
 }
