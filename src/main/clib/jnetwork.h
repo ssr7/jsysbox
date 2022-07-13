@@ -11,18 +11,34 @@ extern "C" {
 /*
  * Class:     ir_moke_jsysbox_network_JNetwork
  * Method:    setIp
- * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lir/moke/jsysbox/network/Ethernet;
+ * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_setIp
-(JNIEnv *, jclass, jstring, jstring, jstring);
+  (JNIEnv *, jclass, jstring, jstring, jstring);
+
+/*
+ * Class:     ir_moke_jsysbox_network_JNetwork
+ * Method:    ifUp
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_ifUp
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     ir_moke_jsysbox_network_JNetwork
+ * Method:    ifDown
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_ifDown
+  (JNIEnv *, jclass, jstring);
 
 /*
  * Class:     ir_moke_jsysbox_network_JNetwork
  * Method:    updateRoute
- * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
+ * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IZZ)V
  */
 JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_updateRoute
-(JNIEnv *, jclass, jstring, jstring, jstring, jstring,jint, jboolean,jboolean);
+  (JNIEnv *, jclass, jstring, jstring, jstring, jstring, jint, jboolean, jboolean);
 
 #ifdef __cplusplus
 }

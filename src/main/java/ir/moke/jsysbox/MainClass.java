@@ -22,8 +22,5 @@ public class MainClass {
         String netmask = "255.255.0.0";
         String gateway = "192.168.1.1";
         String ethernet = "vethd5fd904";
-
-        Short cidr = JNetwork.getCidr(ethernet);
-        System.out.println(cidr);
     }
 }

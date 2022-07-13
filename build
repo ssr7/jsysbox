@@ -1,0 +1,4 @@
+#!/bin/bash 
+
+
+(cd src/main/clib/ ; make) ; mvn clean compile install

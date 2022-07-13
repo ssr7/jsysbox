@@ -14,7 +14,7 @@
 
 package ir.moke.jsysbox.network;
 
-import ir.moke.jsysbox.JNetworkException;
+import ir.moke.jsysbox.JSysboxException;
 import ir.moke.jsysbox.JniNativeLoader;
 
 import java.io.File;
@@ -136,12 +136,20 @@ public class JNetwork {
      * @param iface     interface iface
      * @param ipAddress ip address
      * @param netmask   netmask
-     * @return {@link Ethernet}
-     * @throws JNetworkException
      */
-    public native static void setIp(String iface, String ipAddress, String netmask) throws JNetworkException;
+    public native static void setIp(String iface, String ipAddress, String netmask) throws JSysboxException;
 
-    public static void flush(String iface) throws JNetworkException {
+    /**
+     * @param iface Interface name
+     */
+    public native static void ifUp(String iface) throws JSysboxException;
+
+    /**
+     * @param iface Interface name
+     */
+    public native static void ifDown(String iface) throws JSysboxException;
+
+    public static void flush(String iface) throws JSysboxException {
         setIp(iface, "0.0.0.0", "");
     }
 
