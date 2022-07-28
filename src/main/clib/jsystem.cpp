@@ -74,14 +74,14 @@ JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getEnv (JNIEnv *en
 
 JNIEXPORT jobjectArray JNICALL Java_ir_moke_jsysbox_system_JSystem_envList (JNIEnv *env, jclass clazz) {
     int env_size = sizeof(environ) ;
+
     jstring emp_str = env -> NewStringUTF("");
     jclass s_class = env -> FindClass("java/lang/String");
     jobjectArray ret = (jobjectArray) env -> NewObjectArray(env_size,s_class,emp_str);
 
     if (environ != NULL) {
-        int i = 0 ;
-        while(environ[i]) {
-                 jstring v = env->NewStringUTF(environ[i++]) ;
+        for (int i = 0 ; i < env_size ; i++) {
+                 jstring v = env->NewStringUTF(environ[i]) ;
                  env->SetObjectArrayElement(ret,i,v);
         }
     }

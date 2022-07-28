@@ -14,13 +14,13 @@
 
 package ir.moke.jsysbox;
 
-import ir.moke.jsysbox.network.JNetwork;
+import ir.moke.jsysbox.system.JSystem;
+
+import java.util.List;
 
 public class MainClass {
     public static void main(String[] args) throws Exception {
-        String destination = "10.10.1.220";
-        String netmask = "255.255.0.0";
-        String gateway = "192.168.1.1";
-        String ethernet = "vethd5fd904";
+        List<String> environments = JSystem.environments();
+        System.out.println(environments.size());
     }
 }
