@@ -23,6 +23,7 @@ limitations under the License.
 #include <stdlib.h>
 #include <string.h>
 #include <list>
+#include <vector>
 
 extern char **environ;
 
@@ -80,9 +81,11 @@ JNIEXPORT jobjectArray JNICALL Java_ir_moke_jsysbox_system_JSystem_envList (JNIE
     jobjectArray ret = (jobjectArray) env -> NewObjectArray(env_size,s_class,emp_str);
 
     if (environ != NULL) {
-        for (int i = 0 ; i < env_size ; i++) {
-                 jstring v = env->NewStringUTF(environ[i]) ;
-                 env->SetObjectArrayElement(ret,i,v);
+	int i = 0;
+         for (i = 0 ; i < env_size ; i++) {
+            char* e = environ[i] ;
+            jstring v = env->NewStringUTF(e) ;
+            env->SetObjectArrayElement(ret,i,v);
         }
     }
     return ret;

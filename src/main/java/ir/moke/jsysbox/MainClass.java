@@ -21,6 +21,7 @@ import java.util.List;
 public class MainClass {
     public static void main(String[] args) throws Exception {
         List<String> environments = JSystem.environments();
-        System.out.println(environments.size());
+        System.out.println(environments);
+
     }
 }
