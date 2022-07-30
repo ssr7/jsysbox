@@ -55,6 +55,7 @@ JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_umount (JNIEnv *e
 }
 
 JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_setEnv (JNIEnv *env, jclass clazz, jstring key, jstring value) {
+    if (key == NULL || value == NULL) return false;
     const char *k = env->GetStringUTFChars(key,0);
     const char *v = env->GetStringUTFChars(value,0);
     int r = setenv(k, v, 1);
