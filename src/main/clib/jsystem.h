@@ -66,7 +66,7 @@ JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getEnv
  * Method:    envList
  * Signature: ()V
  */
-JNIEXPORT jobjectArray JNICALL Java_ir_moke_jsysbox_system_JSystem_envList
+JNIEXPORT jobject JNICALL Java_ir_moke_jsysbox_system_JSystem_envList
     (JNIEnv *, jclass);
 
 #ifdef __cplusplus

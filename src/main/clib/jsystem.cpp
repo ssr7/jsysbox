@@ -74,20 +74,34 @@ JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getEnv (JNIEnv *en
     return env -> NewStringUTF(v);
 }
 
-JNIEXPORT jobjectArray JNICALL Java_ir_moke_jsysbox_system_JSystem_envList (JNIEnv *env, jclass clazz) {
-    int env_size = sizeof(environ) ;
-
-    jstring emp_str = env -> NewStringUTF("");
-    jclass s_class = env -> FindClass("java/lang/String");
-    jobjectArray ret = (jobjectArray) env -> NewObjectArray(env_size,s_class,emp_str);
-
-    if (environ != NULL) {
-	int i = 0;
-         for (i = 0 ; i < env_size ; i++) {
-            char* e = environ[i] ;
-            jstring v = env->NewStringUTF(e) ;
-            env->SetObjectArrayElement(ret,i,v);
-        }
-    }
-    return ret;
-}
+/*
+Too buggy ,
+Restart jvm after update env
+*/
+//JNIEXPORT jobject JNICALL Java_ir_moke_jsysbox_system_JSystem_envList (JNIEnv *env, jclass clazz) {
+//	jclass mapClass = env->FindClass("java/util/HashMap");
+//	if(mapClass == NULL)
+//	{
+//		    return NULL;
+//	}
+//	jsize map_len = 1;
+//	jmethodID init = env->GetMethodID(mapClass,"<init>","(I)V");
+//	jobject hashMap = env->NewObject(mapClass,init,map_len) ;
+//	jmethodID put = env->GetMethodID(mapClass, "put","(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;");
+//
+//	int i=0;
+//	cout << "A1" << endl;
+//	while(environ[i]) {
+//		string e = environ[i++];
+//                string key = e.substr(0,e.find('='));
+//		string value = getenv(key.data());
+//
+//		jstring k = env->NewStringUTF(key.data());
+//		jstring v = env->NewStringUTF(value.data());
+//
+//		env->CallObjectMethod(hashMap,put,k,v) ;
+//	}
+//
+//	cout << "END" << endl;
+//    return hashMap;
+//}

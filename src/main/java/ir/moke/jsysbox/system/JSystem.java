@@ -57,14 +57,17 @@ public class JSystem {
 
     public native static String getEnv(String key);
 
-    private native static String[] envList();
-
-    public static List<String> environments() {
-        String[] envList = envList();
-        return Arrays.stream(envList).filter(Objects::nonNull)
-                .filter(item -> !item.isEmpty())
-                .toList();
-    }
+    /*
+    * Do not activate this methods .
+    * */
+//    private native static String[] envList();
+//
+//    public static List<String> environments() {
+//        String[] envList = envList();
+//        return Arrays.stream(envList).filter(Objects::nonNull)
+//                .filter(item -> !item.isEmpty())
+//                .toList();
+//    }
 
     public static List<String> mounts() {
         try {
