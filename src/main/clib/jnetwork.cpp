@@ -292,7 +292,7 @@ JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_setIp (JNIEnv *env,
         const char *err = "Failed to set ip address" ;
         env->ThrowNew(jexception,err);
     } else {
-	network.set_if_up(iface);
+	    network.set_if_up(iface);
     }
 }
 
