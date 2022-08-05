@@ -77,7 +77,7 @@ public class JSystem {
         }
     }
 
-    public static boolean checkMountPoint(String mountpoint) {
+    public static boolean isMount(String mountpoint) {
         List<String> mounts = JSystem.mounts();
         if (mounts == null) return false;
         return mounts.stream().anyMatch(item -> item.contains(mountpoint));
