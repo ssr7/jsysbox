@@ -14,8 +14,14 @@
 
 package ir.moke.jsysbox;
 
+import ir.moke.jsysbox.system.JSystem;
+
 public class MainClass {
     public static void main(String[] args) throws Exception {
+        String s = "sample";
+        JSystem.setHostname(s);
+        String hostname = JSystem.getHostname();
+        System.out.println(hostname);
 
     }
 }

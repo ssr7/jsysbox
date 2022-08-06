@@ -26,6 +26,7 @@ limitations under the License.
 #include <vector>
 
 extern char **environ;
+int hostname_max_size = 64 ;
 
 using namespace std;
 
@@ -54,25 +55,54 @@ JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_umount (JNIEnv *e
     return umount(target_path) == 0 ;
 }
 
-JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_setEnv (JNIEnv *env, jclass clazz, jstring key, jstring value) {
-    if (key == NULL || value == NULL) return false;
-    const char *k = env->GetStringUTFChars(key,0);
-    const char *v = env->GetStringUTFChars(value,0);
-    int r = setenv(k, v, 1);
+JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_setEnv (JNIEnv *env, jclass clazz, jstring jkey, jstring jvalue) {
+    if (jkey == NULL || jvalue == NULL) return false;
+    const char *key = env->GetStringUTFChars(jkey,0);
+    const char *value = env->GetStringUTFChars(jvalue,0);
+    int r = setenv(key, value, 1);
+    if (r != 0)perror("setenv");
     return r == 0;
 }
 
-JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_unSetEnv (JNIEnv *env, jclass clazz, jstring key) {
-    const char *k = env->GetStringUTFChars(key,0);
-    int r = unsetenv(k);
+JNIEXPORT jboolean JNICALL Java_ir_moke_jsysbox_system_JSystem_unSetEnv (JNIEnv *env, jclass clazz, jstring jkey) {
+    const char *key = env->GetStringUTFChars(jkey,0);
+    int r = unsetenv(key);
+    if (r != 0)perror("unsetenv");
     return r == 0;
 }
 
-JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getEnv (JNIEnv *env, jclass clazz, jstring key) {
-    const char *k = env->GetStringUTFChars(key,0);
-    char *v = getenv(k);
-    return env -> NewStringUTF(v);
+JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getEnv (JNIEnv *env, jclass clazz, jstring jkey) {
+    const char *key = env->GetStringUTFChars(jkey,0);
+    char *value = getenv(key);
+    return env -> NewStringUTF(value);
 }
+
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_setHostname (JNIEnv *env, jclass clazz, jstring jkey) {
+    int r ;
+    const char *key = env->GetStringUTFChars(jkey,0);
+    int size = strlen(key);
+
+    jclass jexception = env->FindClass("ir/moke/jsysbox/JSysboxException");
+    if (size > hostname_max_size) {
+                const char *err = "name too long, max 64 character" ;
+                env->ThrowNew(jexception,err);
+    }
+
+    r = sethostname(key,size);
+    if (r != 0) perror("sethostname");
+}
+
+JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getHostname (JNIEnv *env, jclass clazz) {
+    int r ;
+    char value[hostname_max_size];
+    r = gethostname(value,hostname_max_size);
+    if (r != 0) perror("gethostname");
+
+    return env->NewStringUTF(value);
+}
+
+
+
 
 /*
 Too buggy ,

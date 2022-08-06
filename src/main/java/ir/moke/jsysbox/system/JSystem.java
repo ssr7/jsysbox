@@ -28,14 +28,13 @@
 
 package ir.moke.jsysbox.system;
 
+import ir.moke.jsysbox.JSysboxException;
 import ir.moke.jsysbox.JniNativeLoader;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class JSystem {
 
@@ -57,9 +56,12 @@ public class JSystem {
 
     public native static String getEnv(String key);
 
+    public native static void setHostname(String hostname) throws JSysboxException;
+
+    public native static String getHostname();
     /*
-    * Do not activate this methods .
-    * */
+     * Do not activate this methods . Too buggy
+     * */
 //    private native static String[] envList();
 //
 //    public static List<String> environments() {

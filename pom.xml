@@ -18,7 +18,7 @@
     <groupId>ir.moke</groupId>
     <artifactId>jsysbox</artifactId>
     <packaging>jar</packaging>
-    <version>0.2</version>
+    <version>0.3</version>
     <name>jsysbox</name>
     <url>http://maven.apache.org</url>
     <dependencies>

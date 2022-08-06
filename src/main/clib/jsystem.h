@@ -69,6 +69,24 @@ JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getEnv
 JNIEXPORT jobject JNICALL Java_ir_moke_jsysbox_system_JSystem_envList
     (JNIEnv *, jclass);
 
+/*
+ * Class:     ir_moke_jsysbox_system_JSystem
+ * Method:    setHostname
+ * Signature: (Ljava/lang/String;)Z
+ */
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_system_JSystem_setHostname
+    (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     ir_moke_jsysbox_system_JSystem
+ * Method:    getHostname
+ * Signature: (Ljava/lang/String;)Z
+ */
+JNIEXPORT jstring JNICALL Java_ir_moke_jsysbox_system_JSystem_getHostname
+    (JNIEnv *, jclass);
+
+
+
 #ifdef __cplusplus
 }
 #endif
