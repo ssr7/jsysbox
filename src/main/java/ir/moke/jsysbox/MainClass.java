@@ -14,14 +14,23 @@
 
 package ir.moke.jsysbox;
 
-import ir.moke.jsysbox.system.JSystem;
+import ir.moke.jsysbox.time.JDateTime;
+
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class MainClass {
-    public static void main(String[] args) throws Exception {
-        String s = "sample";
-        JSystem.setHostname(s);
-        String hostname = JSystem.getHostname();
-        System.out.println(hostname);
+    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    public static void main(String[] args) throws Exception {
+//        System.out.println("Sync hardware to system");
+//        JDateTime.syncHardwareToSystem();
+//        System.out.println("----------------------------------");
+//        System.out.println("Sync system to hardware");
+//        ZoneId of = ZoneId.of("Asia/Tokyo");
+//        JDateTime.setTimezone(of);
+//        JDateTime.syncSystemToHardware();
+
+        System.out.println(JDateTime.getZonedDateTime());
     }
 }
