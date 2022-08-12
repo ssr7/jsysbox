@@ -108,10 +108,10 @@ JNIEXPORT jobject JNICALL Java_ir_moke_jsysbox_time_JDateTime_getZonedDateTime (
     return zonedDateTime;
 }
 
-JNIEXPORT void JNICALL Java_ir_moke_jsysbox_time_JDateTime_setDateTime (JNIEnv *env, jclass clazz, jlong timestamp) {
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_time_JDateTime_setDateTime (JNIEnv *env, jclass clazz, jlong timestamp, jlong milliseconds) {
     struct timeval tv;
     tv.tv_sec = (long) timestamp ;
-    tv.tv_usec = 00000;
+    tv.tv_usec = (long) milliseconds;
     int r = set_system_dt(tv) ;
     if (r != 0) throwException(env,"Failed to set date and time"); 
 }

@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.concurrent.TimeUnit;
 
 public class JDateTime {
     static {
@@ -30,7 +31,8 @@ public class JDateTime {
 
     public native static void setTimezone(String timezone) throws JSysboxException;
 
-    private native static void setDateTime(long timestamp) throws JSysboxException;
+    private native static void setDateTime(long timestamp, long millisecond) throws JSysboxException;
+
     public native static ZonedDateTime getZonedDateTime() throws JSysboxException;
 
     public native static void syncSystemToHardware() throws JSysboxException;
@@ -40,7 +42,7 @@ public class JDateTime {
     public static void setDateTime(LocalDateTime dateTime) throws JSysboxException {
         dateTime = dateTime.truncatedTo(ChronoUnit.SECONDS);
         Timestamp timestamp = Timestamp.valueOf(dateTime.truncatedTo(ChronoUnit.SECONDS));
-        setDateTime(timestamp.getTime() / 1000);
+        setDateTime(TimeUnit.SECONDS.convert(timestamp.getTime(),TimeUnit.MILLISECONDS), TimeUnit.MILLISECONDS.convert(timestamp.getNanos(), TimeUnit.NANOSECONDS));
     }
 
     public static void setTimezone(ZoneId zone) throws JSysboxException {

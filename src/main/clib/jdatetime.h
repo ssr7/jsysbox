@@ -18,10 +18,10 @@ JNIEXPORT void JNICALL Java_ir_moke_jsysbox_time_JDateTime_setTimezone
 /*
  * Class:     ir_moke_jsysbox_time_JDateTime
  * Method:    setDateTime
- * Signature: (J)V
+ * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_ir_moke_jsysbox_time_JDateTime_setDateTime
-  (JNIEnv *, jclass, jlong);
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     ir_moke_jsysbox_time_JDateTime
