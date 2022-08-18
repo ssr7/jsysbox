@@ -16,7 +16,7 @@ jsystem: init
 
 jnetwork: init
 	$(CC) $(CFLAGS) -shared -o $(BUILD_DIR)/jnetwork.so jnetwork.cpp
-	strip --strip-all $(BUILD_DIR)/jsystem.so
+	strip --strip-all $(BUILD_DIR)/jnetwork.so
 
 jdatetime: init
 	$(CC) $(CFLAGS) -shared -o $(BUILD_DIR)/jdatetime.so jdatetime.cpp
