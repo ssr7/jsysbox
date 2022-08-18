@@ -282,8 +282,12 @@ public:
     }
 } ;
 
+void throwException(JNIEnv *env, string err) {
+	jclass jexception = env->FindClass("ir/moke/jsysbox/JSysboxException");
+	env->ThrowNew(jexception,err.data());
+}
+
 JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_setIp (JNIEnv *env, jclass clazz, jstring jiface, jstring jaddr, jstring jnetmask) {
-    jclass jexception = env->FindClass("ir/moke/jsysbox/JSysboxException");
     Network network ;
     string iface = env->GetStringUTFChars(jiface,0);
     string addr = env->GetStringUTFChars(jaddr,0);
@@ -291,7 +295,7 @@ JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_setIp (JNIEnv *env,
     int r = network.set_ip(iface,addr,netmask) ;
     if (r != 0) {
         const char *err = "Failed to set ip address" ;
-        env->ThrowNew(jexception,err);
+        throwException(env,err);
     } else {
 	    network.set_if_up(iface);
     }
@@ -325,13 +329,14 @@ JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_updateRoute
     string netmask = isHost ? "255.255.255.255" : env->GetStringUTFChars(jnetmask,0) ;
 
     Network network ;
-    network.update_route(destination,
+    int r = network.update_route(destination,
                          netmask,
                          gateway,
                          iface,
                          metrics,
                          isHost,
                          del) ;
+    if (r < 0) throwException(env,"Failed to update route table");
 }
 
 JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_initResolve() {

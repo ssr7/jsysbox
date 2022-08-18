@@ -28,6 +28,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class JNetwork {
@@ -163,25 +164,31 @@ public class JNetwork {
      * @param isHost      route type host or network
      * @param delete      add or delete
      */
-    public native static void updateRoute(String destination, String netmask, String gateway, String iface, int metrics, boolean isHost, boolean delete);
+    public native static int updateRoute(String destination, String netmask, String gateway, String iface, int metrics, boolean isHost, boolean delete) throws JSysboxException;
 
-    public static void addHostToRoute(String destination, String gateway, String iface, Integer metrics) {
+    public static void addHostToRoute(String destination, String gateway, String iface, Integer metrics) throws JSysboxException {
         updateRoute(destination, null, gateway, iface, metrics, true, false);
     }
 
-    public static void addNetworkToRoute(String destination, String netmask, String gateway, String iface, Integer metrics) {
+    public static void addNetworkToRoute(String destination, String netmask, String gateway, String iface, Integer metrics) throws JSysboxException {
         updateRoute(destination, netmask, gateway, iface, metrics, false, false);
     }
 
     /**
      * @param gateway ip address
      */
-    public static void setDefaultGateway(String gateway) {
+    public static void setDefaultGateway(String gateway) throws JSysboxException {
         updateRoute("0.0.0.0", "0.0.0.0", gateway, null, DEFAULT_METRICS, false, false);
     }
 
-    public static void deleteRoute(int id) {
-        route().stream().filter(item -> item.id() == id).findFirst().ifPresent(item -> updateRoute(item.destination(), item.netmask(), item.gateway(), item.iface(), item.metrics(), false, true));
+    public static void deleteRoute(int id) throws JSysboxException {
+        Optional<Route> optionalRoute = route().stream()
+                .filter(item -> item.id() == id)
+                .findFirst();
+        if (optionalRoute.isPresent()) {
+            Route route = optionalRoute.get();
+            updateRoute(route.destination(), route.netmask(), route.gateway(), route.iface(), route.metrics(), false, true);
+        }
     }
 
     public static List<Route> route() {
