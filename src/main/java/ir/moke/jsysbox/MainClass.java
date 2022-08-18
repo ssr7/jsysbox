@@ -14,15 +14,17 @@
 
 package ir.moke.jsysbox;
 
-import ir.moke.jsysbox.time.JDateTime;
+import ir.moke.jsysbox.network.JNetwork;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class MainClass {
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static void main(String[] args) throws Exception {
-        JDateTime.setDateTime(LocalDateTime.now());
+        String ip = "10.0.2.12";
+        String netmask = "255.255.255.0";
+        String iface = "eth0";
+        JNetwork.setIp(iface, ip, netmask);
     }
 }
