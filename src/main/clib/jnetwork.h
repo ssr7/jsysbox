@@ -40,6 +40,13 @@ JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_ifDown
 JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_updateRoute
   (JNIEnv *, jclass, jstring, jstring, jstring, jstring, jint, jboolean, jboolean);
 
+/*
+ * Class:     ir_moke_jsysbox_network_JNetwork
+ * Method:    initResolve
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_initResolve();
+
 #ifdef __cplusplus
 }
 #endif

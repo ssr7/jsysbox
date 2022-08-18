@@ -18,6 +18,7 @@ import ir.moke.jsysbox.JSysboxException;
 import ir.moke.jsysbox.JniNativeLoader;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
 import java.nio.file.Files;
@@ -279,4 +280,19 @@ public class JNetwork {
         int oct4 = ((byte) (shft & 0x000000ff)) & 0xff;
         return oct1 + "." + oct2 + "." + oct3 + "." + oct4;
     }
+
+    public static void setDnsNameServers(String... ipAddresses) throws JSysboxException {
+        File file = new File("/etc/resolv.conf");
+        try (FileWriter writer = new FileWriter(file)) {
+            for (String ip : ipAddresses) {
+                writer.write(String.format("nameserver %s\n", ip));
+            }
+        } catch (IOException e) {
+            throw new JSysboxException(e.getMessage());
+        }
+
+        initResolve();
+    }
+
+    private native static void initResolve();
 }

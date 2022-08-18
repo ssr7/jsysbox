@@ -24,6 +24,7 @@ limitations under the License.
 #include <ifaddrs.h>
 #include <list>
 #include <errno.h>
+#include <resolv.h>
 
 #include <net/if.h>
 #include <net/if.h>
@@ -331,4 +332,8 @@ JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_updateRoute
                          metrics,
                          isHost,
                          del) ;
+}
+
+JNIEXPORT void JNICALL Java_ir_moke_jsysbox_network_JNetwork_initResolve() {
+    res_init();
 }
